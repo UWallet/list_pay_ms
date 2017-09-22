@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  my_card: 1
+  description: MyText
+  date_pay: 2017-09-20
+  cost: 1
+  target_account: 1
+
+two:
+  my_card: 1
+  description: MyText
+  date_pay: 2017-09-20
+  cost: 1
+  target_account: 1
