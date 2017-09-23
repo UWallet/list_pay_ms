@@ -8,17 +8,21 @@ class ListsController < ApplicationController
     description: description
   }
   end
+
   def showPendingPaybyUser
-      list = List.by_user(params[:user_id])
-      render json: list
+    if !(Integer(params[:user_id]) rescue false)
+      renderError("Not Acceptable (Invalid Params)", 406, "The parameter user_id is not an integer")
+      return -1
     end
+    list = List.by_user(params[:user_id])
+    if(list)
+  	  render json: list
+  	else
+        renderError("Not Found", 404, "The resource does not exist")
+  	end
+  end
 
   # GET /lists
-  '''def index
-    @lists = List.all
-
-    render json: @lists
-  end'''
   def index
     if(params[:firstResult])
       @first=params[:firstResult]
@@ -55,29 +59,18 @@ class ListsController < ApplicationController
 
   # GET /lists/1
   def show
-
-	if !(Integer(params[:id]) rescue false)
-      renderError("Not Acceptable (Invalid Params)", 406, "The parameter id is not an integer")
-	  return -1
-	end
-	if(@list)
-	  render json: @list
-	else
-      renderError("Not Found", 404, "The resource does not exist")
-	end
+  	if !(Integer(params[:id]) rescue false)
+        renderError("Not Acceptable (Invalid Params)", 406, "The parameter id is not an integer")
+  	  return -1
+  	end
+  	if(@list)
+  	  render json: @list
+  	else
+        renderError("Not Found", 404, "The resource does not exist")
+  	end
   end
 
-  '''
-  # POST /lists
-  def create
-    @list = List.new(list_params)
 
-    if @list.save
-      head 201
-    else
-      render json: @list.errors, status: :unprocessable_entity
-    end
-  end'''
   def create
     #if !(Integer(params[:number]) rescue false)
     #  renderError("Bad Request", 400, "The parameter number is not a Integer")
