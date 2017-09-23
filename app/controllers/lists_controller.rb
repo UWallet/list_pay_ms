@@ -16,7 +16,7 @@ class ListsController < ApplicationController
     end
     list = List.by_user(params[:user_id])
     if(list)
-  	  render json: list
+  	  render json: list, status: 200
   	else
         renderError("Not Found", 404, "The resource does not exist")
   	end
@@ -75,6 +75,8 @@ class ListsController < ApplicationController
     #if !(Integer(params[:number]) rescue false)
     #  renderError("Bad Request", 400, "The parameter number is not a Integer")
     #  return -1
+
+    puts params[:user_id]
     if !(Integer(params[:user_id]) rescue false)
       renderError("Not Acceptable (Invalid Params)", 400, "The parameter user_id is not an Integer")
       return -1
