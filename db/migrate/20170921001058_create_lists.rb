@@ -3,10 +3,10 @@ class CreateLists < ActiveRecord::Migration[5.1]
     create_table :lists do |t|
       t.integer :user_id
       t.text :description
-      t.string :date_pay
+      t.date :date_pay
       t.integer :cost
       t.integer :target_account
-      t.boolean :state
+      t.boolean :state_pay
 
       t.timestamps
     end

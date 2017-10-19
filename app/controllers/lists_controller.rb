@@ -158,6 +158,6 @@ class ListsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def list_params
       params.require(:list).permit(:user_id, :description,
-        :date_pay, :cost, :target_account, :state)
+        :date_pay, :cost, :target_account, :state_pay)
     end
 end
