@@ -1,6 +1,6 @@
 version: '2'
 services:
-  list_pay_db:
+  list-pay-db:
       image: mysql
       ports:
         - "3310:3310"
@@ -9,11 +9,12 @@ services:
         MYSQL_USER: arqsoft
         MYSQL_PASSWORD: 123
         MYSQL_DATABASE: lists
-        MYSQL_HOST: list_pay_db
-  list_pay_ms:
-    build: .
+        MYSQL_HOST: list-pay-db
+  list-pay-ms:
+    #build: .
+    image: kmendezp/list-pay-ms
     command: bash -c "sleep 40 && rm -f tmp/pids/server.pid && bundle exec rails db:migrate && bundle exec rails s -p 3005 -b '0.0.0.0'"
     ports:
       - "3005:3005"
     depends_on:
-      - list_pay_db
+      - list-pay-db
